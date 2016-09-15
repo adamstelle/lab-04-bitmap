@@ -1,4 +1,4 @@
-- Access the bitmap file
+- Access the buffer of a bitmap file
   - Break into components
     - Convert header field buffer to string
     - Access, parse & store, file size
