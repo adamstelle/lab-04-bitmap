@@ -1,0 +1,6 @@
+- Access the bitmap file
+  - Break into components
+    - Convert header field buffer to string
+    - Access, parse & store, file size
+    - Access & store offset (location) for pixel array
+- Access the color array
