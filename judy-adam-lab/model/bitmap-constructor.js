@@ -3,10 +3,9 @@
 // const buffer = module.exports = new Buffer(file);
 
 module.exports = function Buffer(buffer) {
-  var bitMapHeader = {};
-  bitMapHeader.titleString = buffer.toString('utf8', 0, 2);
-  bitMapHeader.fileSize = buffer.readUInt32LE(2);
-  bitMapHeader.offset = buffer.readUInt32LE(10);
-  bitMapHeader.pixelArrayLength = bitMapHeader.fileSize - bitMapHeader.offset;
-  return bitMapHeader;
+  Buffer.titleString = buffer.toString('utf8', 0, 2);
+  Buffer.fileSize = buffer.readUInt32LE(2);
+  Buffer.offset = buffer.readUInt32LE(10);
+  Buffer.pixelArrayLength = Buffer.fileSize - Buffer.offset;
+  return Buffer;
 };

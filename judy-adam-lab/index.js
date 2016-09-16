@@ -12,14 +12,14 @@ const pics = {
 };
 
 function readPicData(filepath, callback1, callback2){
-  fs.readFile(pics.nonpalette, (err, data) => {
+  fs.readFile(filepath, (err, data) => {
     if (err) errorHandler(err);
     var picData = callback1(data);
     callback2(data, picData);
   });
 }
 
-readPicData(pics.fingerprint, bitmapConstructor, colors.greyScale);
+readPicData(pics.house, bitmapConstructor, colors.greyScale);
 
 function errorHandler(err) {
   console.log(err);
