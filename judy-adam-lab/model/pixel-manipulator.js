@@ -10,8 +10,8 @@ exports.addBorder = function(buffer, picData) {
   for(var i=0;i<pixelArray.length;i=i+width){
     var rowPixels = pixelArray.slice(i,i+width);
     if(i<(width*4) || i>(pixelArray.length-(width*4))) {
-      for(var j=0;j<rowPixels.length;j=j+4) {
-        var rgba = rowPixels.slice(j,j+4);
+      for(var j=0;j<rowPixels.length;j=j+3) {
+        var rgba = rowPixels.slice(j,j+3);
         rgba[0] = rgba[1] = rgba[2] = rgba[3] = 0;
       }
     } else {

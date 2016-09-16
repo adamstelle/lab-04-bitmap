@@ -1,9 +1,11 @@
 'use strict';
+
 const fs = require('fs');
 const bitmapConstructor = require(`${__dirname}/model/bitmap-constructor`);
 const colorExperiment = require(`${__dirname}/model/color-experiment`);
 const colors = require(`${__dirname}/model/color-constructor`);
 const pixels = require(`${__dirname}/model/pixel-manipulator`);
+const errorHandler = require(`${__dirname}/model/error-handler`);
 const pics = {
   fingerprint : `${__dirname}/../assets/finger-print.bmp`,
   bitmappic : `${__dirname}/../assets/bitmap.bmp`,
@@ -19,8 +21,4 @@ function readPicData(filepath, callback1, callback2){
   });
 }
 
-readPicData(pics.fingerprint, bitmapConstructor, pixels.addBorder);
-
-function errorHandler(err) {
-  console.log(`Aww dude! Error: ${err}`);
-}
+readPicData(pics.nonpalette, bitmapConstructor, pixels.addBorder);
