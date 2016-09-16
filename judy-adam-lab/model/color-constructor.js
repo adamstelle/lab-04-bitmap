@@ -3,16 +3,18 @@
 const fs = require('fs');
 module.exports = exports = {};
 
-exports = function ColorTransform (buffer, picData){
-  ColorTransform.offset = buffer.readUInt32LE(10);
-  ColorTransform.colorArrayEnd = picData.offset;
-  ColorTransform.colorArray =  buffer.slice(54, this.colorArrayEnd);
-};
+// exports.Color = function (buffer){
+//   this.colorArrayEnd = buffer.toString('utf8', 0, 2);
+//   this.fileSize = buffer.readUInt32LE(2);
+//   this.offset = buffer.readUInt32LE(10);
+//   this.colorArrayEnd =
+//   return this;
+// };
 
 exports.colorInvert = function (buffer, picData) {
   var colorArrayEnd = picData.offset;
   var colorArray = buffer.slice(54,colorArrayEnd);
-  for (var i=0; i< colorArrayEnd; i++) {
+  for (var i=0; i<colorArrayEnd; i++) {
     colorArray[i] = 255 - colorArray[i];
   }
   fs.writeFile(`${__dirname}/../assets/outputs/testing-invert.bmp`, buffer, (err) => {
@@ -43,16 +45,6 @@ exports.rgbScale = function (buffer, picData) {
   fs.writeFile(`${__dirname}/../assets/outputs/testingrgbscale.bmp`, buffer, (err) => {
     if(err) throw errorHandler(err);
   });
-};
-
-exports.slicingColorArray = function(array, number){
-  var length = array.length;
-  var i = 0;
-  var size;
-  while (i < length){
-    size = Math.ceil((length - i) / number--);
-    exports.slicedArray.push(array.slice(i, i += size));
-  }
 };
 
 function errorHandler(err) {
