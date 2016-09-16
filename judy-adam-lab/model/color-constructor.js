@@ -2,6 +2,16 @@
 
 const fs = require('fs');
 module.exports = exports = {};
+exports.slicedArray = []; //only temporary for now
+
+//TODO: Make this dry by making colorArrayEnd and colorArray global in Color constructor
+// exports.Color = function(buffer, picData){
+//   this.offset = buffer.readUInt32LE(10);
+//   this.colorArrayEnd = picData.offset;
+//   this.colorArrayEnd = buffer.slice(54, this.colorArrayEnd);
+//   console.log(this);
+//   return this;
+// };
 
 exports.colorInvert = function (buffer, picData) {
   var colorArrayEnd = picData.offset;
@@ -42,3 +52,13 @@ exports.rgbScale = function (buffer, picData) {
 function errorHandler(err) {
   console.log(`Aww dude!! ${err}`);
 }
+//TODO: Consider if we want to use this method for anything. This method slices the buffer into individual 4-part arrays, e.g. [rgba], [rgba], [rgba].....
+// exports.slicingColorArray = function(array, number){
+//   var length = array.length;
+//   var i = 0;
+//   var size;
+//   while (i < length){
+//     size = Math.ceil((length - i) / number--);
+//     exports.slicedArray.push(array.slice(i, i += size));
+//   }
+// };
