@@ -10,7 +10,7 @@ module.exports = function colorExperiment(buffer, bitMapHeader) {
     colorArray.push(buffer.readUInt8(i));
   }
   var modifiedColorArray = buffer.slice(54,colorArrayEnd);
-  for (var j=3; j<modifiedColorArray.length; j++) {
+  for (var j=2; j<modifiedColorArray.length; j++) {
     modifiedColorArray[j] = 255;
     j++;
     modifiedColorArray[j] = 0;
