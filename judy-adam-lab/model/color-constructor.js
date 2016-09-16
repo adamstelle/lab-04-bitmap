@@ -2,8 +2,6 @@
 
 const fs = require('fs');
 
-const bitmapConstructor = require(`${__dirname}/bitmap-constructor`);
-
 module.exports = exports = {};
 exports.slicedArray = [];
 
@@ -22,8 +20,24 @@ exports.greyScale = function (buffer, picData){
   var colorArrayEnd = picData.offset;
   var colorArray = buffer.slice(54,colorArrayEnd);
   exports.slicingColorArray(colorArray, 256);
+  // console.log(exports.slicedArray);
 
+  // var averageVal = (exports.slicedArray[255][0]+exports.slicedArray[255][1]+exports.slicedArray[255][2]+exports.slicedArray[255][3])/4;
+  // console.log(exports.slicedArray[255][0]);
+  // console.log(exports.slicedArray[255][1]);
+  // console.log(exports.slicedArray[255][2]);
+  // console.log(exports.slicedArray[255][3]);
+  // console.log(averageVal);
+  exports.slicedArray.map(function(element, index){
+    console.log(element, index); 
+    return element;
+  });
+  //   sum =+ element;
+  //   var divisor = index + 1;
+  //   var average = sum / divisor;
+  // });
 };
+
 
 //inspired/slightly taken from stackoverflow http://stackoverflow.com/questions/8188548/splitting-a-js-array-into-n-arrays
 exports.slicingColorArray = function(array, number){
