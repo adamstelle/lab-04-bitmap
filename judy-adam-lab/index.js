@@ -1,8 +1,8 @@
 'use strict';
 
-const fs = require('fs');
 const bitmapConstructor = require(`${__dirname}/model/bitmap-constructor`);
 const colorExperiment = require(`${__dirname}/model/color-experiment`);
+const fileHelper = require(`${__dirname}/lib/bitmap-file-helper`);
 const colors = require(`${__dirname}/model/color-constructor`);
 const pixels = require(`${__dirname}/model/pixel-manipulator`);
 const errorHandler = require(`${__dirname}/model/error-handler`);
@@ -13,12 +13,4 @@ const pics = {
   nonpalette : `${__dirname}/../assets/non-palette-bitmap.bmp`
 };
 
-function readPicData(filepath, callback1, callback2){
-  fs.readFile(filepath, (err, data) => {
-    if (err) errorHandler(err);
-    var picData = callback1(data);
-    callback2(data, picData);
-  });
-}
-
-readPicData(pics.nonpalette, bitmapConstructor, pixels.addBorder);
+fileHelper.readPicData(pics.fingerprint, bitmapConstructor, colors.colorInvert, colors.greyScale, colors.rgbScale);
