@@ -19,7 +19,7 @@ module.exports = function colorExperiment(buffer, bitMapHeader) {
     j++;
     modifiedColorArray[j] = 0;
   }
-  fs.writeFile(`${__dirname}/test${i}.bmp`, buffer, (err) => {
+  fs.writeFile(`${__dirname}/testimg.bmp`, buffer, (err) => {
     if(err) throw err;
   });
 };
