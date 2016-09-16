@@ -12,7 +12,7 @@ const pics = {
 };
 
 function readPicData(filepath, callback1, callback2){
-  fs.readFile(pics.nonpalette, (err, data) => {
+  fs.readFile(pics.bitmappic, (err, data) => {
     if (err) errorHandler(err);
     var picData = callback1(data);
     debugger;
@@ -20,8 +20,8 @@ function readPicData(filepath, callback1, callback2){
   });
 }
 
-readPicData(pics.fingerprint, bitmapConstructor, colors.greyScale);
+readPicData(pics.fingerprint, bitmapConstructor, colors.colorInvert);
 
 function errorHandler(err) {
-  console.log(err);
+  console.log(`Aww dude! Error: ${err}`);
 }
