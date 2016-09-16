@@ -12,16 +12,18 @@ const pics = {
 };
 
 function readPicData(filepath, callback1, callback2){
-  fs.readFile(pics.bitmappic, (err, data) => {
+  fs.readFile(filepath, (err, data) => {
     if (err) errorHandler(err);
     var picData = callback1(data);
-    debugger;
-    callback2(data, picData);
+    callback2(data,picData);
+    // callback3(data,picData);
+    // callback4(data,picData);
   });
 }
 
-readPicData(pics.fingerprint, bitmapConstructor, colors.colorInvert);
-
-function errorHandler(err) {
+function errorHandler (err) {
   console.log(`Aww dude! Error: ${err}`);
 }
+
+
+readPicData(pics.fingerprint, bitmapConstructor, colors.colorInvert);

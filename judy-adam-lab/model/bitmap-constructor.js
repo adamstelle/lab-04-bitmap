@@ -1,7 +1,8 @@
 'use strict';
 
 
-module.exports = function Buffer(buffer) {
+
+module.exports = function Buffer(buffer){
   Buffer.titleString = buffer.toString('utf8', 0, 2);
   Buffer.fileSize = buffer.readUInt32LE(2);
   Buffer.offset = buffer.readUInt32LE(10);
