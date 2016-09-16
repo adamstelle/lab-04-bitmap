@@ -15,6 +15,7 @@ function readPicData(filepath, callback1, callback2){
   fs.readFile(pics.nonpalette, (err, data) => {
     if (err) errorHandler(err);
     var picData = callback1(data);
+    debugger;
     callback2(data, picData);
   });
 }

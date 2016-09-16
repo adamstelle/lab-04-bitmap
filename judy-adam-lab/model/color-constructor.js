@@ -9,25 +9,24 @@ exports.colorInvert = function (buffer, picData) {
   for (var i=0; i<colorArrayEnd; i++) {
     colorArray[i] = 255 - colorArray[i];
   }
-  fs.writeFile(`${__dirname}/testingInvert.bmp`, buffer, (err) => {
-    if(err) throw err;
+  fs.writeFile(`${__dirname}/assets/testingInvert.bmp`, buffer, (err) => {
+    if(err) throw errorHandler(err);
   });
 };
 
 exports.greyScale = function (buffer, picData) {
   var colorArrayEnd = picData.offset;
   var colorArray = buffer.slice(54,colorArrayEnd);
-  // for (var i=3; i<colorArrayEnd; i=i+4) {
-  var rgba = buffer.slice(0,4);
-  var avgVal = (rgba[0] + rgba[1] + rgba[2])/ 3;
-  rgba[0] = rgba[1] = rgba[2] = avgVal;
-  console.log(rgba[2]);
-  // rgba.reduce(function(prev,curr){
-    // console.log('is this the averge?', (prev + curr)/rgba.length);
-  // return (prev + curr)/rgba.length;
-  //
-  fs.writeFile(`${__dirname}/testingGreyscale.bmp`, buffer, (err) => {
-    if(err) throw err;
+  for (var i=0; i<colorArray.length; i=i+4){
+    var rgba = colorArray.slice(i,i+4);
+    var avgVal = (rgba[0] + rgba[1] + rgba[2])/ 3;
+    rgba[0] = rgba[1] = rgba[2] = avgVal;
+  }
+  fs.writeFile(`${__dirname}/assets/testingGreyscale.bmp`, buffer, (err) => {
+    if(err) throw errorHandler(err);
   });
-  // }
 };
+
+function errorHandler(err) {
+  console.log(err);
+}
