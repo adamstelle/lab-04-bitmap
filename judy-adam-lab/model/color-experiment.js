@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const errorHandler = require(`${__dirname}/error-handler.js`);
 
 module.exports = function colorExperiment(buffer, bitMapHeader) {
   var colorArrayStart = 54;
@@ -20,6 +21,6 @@ module.exports = function colorExperiment(buffer, bitMapHeader) {
     modifiedColorArray[j] = 0;
   }
   fs.writeFile(`${__dirname}/testimg.bmp`, buffer, (err) => {
-    if(err) throw err;
+    if(err) throw errorHandler(err);
   });
 };

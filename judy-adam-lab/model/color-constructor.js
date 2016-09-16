@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const errorHandler = require(`${__dirname}/error-handler.js`);
 module.exports = exports = {};
 
 exports.colorInvert = function (buffer, picData) {
@@ -38,7 +39,3 @@ exports.rgbScale = function (buffer, picData) {
     if(err) throw errorHandler(err);
   });
 };
-
-function errorHandler(err) {
-  console.log(`Aww dude!! ${err}`);
-}
