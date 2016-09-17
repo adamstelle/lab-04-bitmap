@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 const Buffer = module.exports = function (buffer){
   Buffer.titleString = buffer.toString('utf8', 0, 2);
   Buffer.fileSize = buffer.readUInt32LE(2);
