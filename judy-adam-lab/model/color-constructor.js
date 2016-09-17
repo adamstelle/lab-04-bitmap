@@ -6,7 +6,7 @@ const errorHandler = require(`${__dirname}/error-handler.js`);
 const runManipulations = module.exports = function(buffer, picData) {
   colorInvert(buffer, picData);
   greyScale(buffer, picData);
-  // rgbScale(buffer, picData); 
+  rgbScale(buffer, picData);
 };
 
 var ColorManipulation = function(buffer, picData) {
