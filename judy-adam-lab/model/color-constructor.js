@@ -56,7 +56,6 @@ var ColorManipulation = function(buffer, picData) {
 };
 
 
-
 module.exports = function(buffer, picData) {
   ee.emit('colorInvert', buffer, picData);
 };
