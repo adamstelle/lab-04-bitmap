@@ -12,4 +12,4 @@ const pics = {
   nonpalette : `${__dirname}/../assets/non-palette-bitmap.bmp`
 };
 
-fileHelper.readPicData(pics.house, bitmapConstructor, pixels.addBorder);
+fileHelper.readPicData(pics.fingerprint, bitmapConstructor, colors.colorInvert);
