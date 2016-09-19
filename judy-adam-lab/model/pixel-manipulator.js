@@ -7,7 +7,6 @@ module.exports = exports = {};
 exports.addBorder = function(buffer, picData) {
   var pixelArray = buffer.slice(picData.offset, picData.fileSize);
   var width = buffer.readUInt32LE(18);
-  console.log(buffer.readUInt8(62));
   for(var i=0;i<pixelArray.length;i=i+width){
     var rowPixels = pixelArray.slice(i,i+width);
     if(i<(width*4) || i>(pixelArray.length-(width*4))) {
