@@ -4,8 +4,7 @@ const fs = require('fs');
 const errorHandler = require(`${__dirname}/error-handler.js`);
 const EE = require('events');
 const ee = new EE();
-
-
+module.exports = exports = {};
 
 ee.on('colorInvert', function(buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
@@ -17,7 +16,6 @@ ee.on('colorInvert', function(buffer, picData) {
     ee.emit('greyScale', buffer, picData);
   });
 });
-
 
 ee.on('greyScale', function (buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
@@ -43,7 +41,7 @@ ee.on('rgbScale', function (buffer, picData) {
   });
 });
 
-var ColorManipulation = function(buffer, picData) {
+const ColorManipulation = function(buffer, picData) {
   ColorManipulation.colorArrayEnd = picData.offset;
   ColorManipulation.rgbSequence = 4;
   if(ColorManipulation.colorArrayEnd-54==0){
@@ -54,8 +52,6 @@ var ColorManipulation = function(buffer, picData) {
   ColorManipulation.colorArray =buffer.slice(54,ColorManipulation.colorArrayEnd);
   return ColorManipulation;
 };
-
-
 
 module.exports = function(buffer, picData) {
   ee.emit('colorInvert', buffer, picData);
