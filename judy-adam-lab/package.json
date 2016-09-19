@@ -20,9 +20,14 @@
   },
   "homepage": "https://github.com/adamstelle/lab-04-bitmap#readme",
   "devDependencies": {
+<<<<<<< HEAD
     "gulp": "^3.9.1",
     "gulp-mocha": "^3.0.1",
     "mocha": "^3.0.2"
+=======
+    "chai": "3.5.0",
+    "mocha": "3.0.2"
+>>>>>>> a30b0ce4a33d5ac017a5fb3ec2062f0321778814
   },
   "dependencies": {
     "fs": "0.0.1-security"

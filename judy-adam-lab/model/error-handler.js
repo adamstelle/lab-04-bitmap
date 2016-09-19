@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = function errorHandler(err) {
-  console.log(`Aww dudebrah!! We hit an error: ${err}`);
+  throw new Error(`Aww dudebrah!! We hit an error: ${err}`);
 };
