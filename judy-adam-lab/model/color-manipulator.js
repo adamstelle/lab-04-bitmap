@@ -21,7 +21,7 @@ exports.greyScale = function (buffer, picData, callback) {
     rgba[0] = rgba[1] = rgba[2] = avgVal;
   }
   exports.writeFile('greyscaled.bmp', buffer);
-  if (callback) callback(buffer, picData);
+  if (callback) callback(buffer);
 };
 
 exports.rgbScale = function (buffer, picData, callback) {
@@ -31,7 +31,7 @@ exports.rgbScale = function (buffer, picData, callback) {
     colorData.colorArray[i+1] = colorData.colorArray[i+1] * .5;
   }
   exports.writeFile('rgbscaled.bmp', buffer);
-  if (callback) callback(buffer, picData);
+  if (callback) callback(buffer);
 };
 
 exports.writeFile = function(filename, buffer) {
@@ -39,7 +39,6 @@ exports.writeFile = function(filename, buffer) {
     if(err) throw errorHandler(err);
   });
 };
-
 
 exports.manipulate = function(buffer, picData) {
   this.picData = picData;
