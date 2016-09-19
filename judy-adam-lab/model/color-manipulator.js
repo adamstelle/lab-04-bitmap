@@ -2,14 +2,9 @@
 
 const fs = require('fs');
 const errorHandler = require(`${__dirname}/error-handler.js`);
+module.exports = exports = {};
 
-const runManipulations = module.exports = function(buffer, picData) {
-  colorInvert(buffer, picData);
-  greyScale(buffer, picData);
-  // rgbScale(buffer, picData);
-};
-
-var ColorManipulation = function(buffer, picData) {
+const ColorManipulation = function(buffer, picData) {
   ColorManipulation.colorArrayEnd = picData.offset;
   ColorManipulation.rgbSequence = 4;
   if(ColorManipulation.colorArrayEnd-54==0){
@@ -21,7 +16,7 @@ var ColorManipulation = function(buffer, picData) {
   return ColorManipulation;
 };
 
-var colorInvert = function(buffer, picData) {
+exports.colorInvert = function(buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
   for (var i=0; i<colorData.colorArrayEnd; i++) {
     colorData.colorArray[i] = 255 - colorData.colorArray[i];
@@ -31,7 +26,7 @@ var colorInvert = function(buffer, picData) {
   });
 };
 
-var greyScale = function (buffer, picData) {
+exports.greyScale = function (buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
   for (var i=0; i<colorData.colorArray.length; i=i+colorData.rgbSequence){
     var rgba = colorData.colorArray.slice(i,i+colorData.rgbSequence);
@@ -43,7 +38,7 @@ var greyScale = function (buffer, picData) {
   });
 };
 
-var rgbScale = function (buffer, picData) {
+exports.rgbScale = function (buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
   for (var i=0; i<colorData.colorArray.length; i=i+colorData.rgbSequence){
     colorData.colorArray[i] = colorData.colorArray[i] * .5;
