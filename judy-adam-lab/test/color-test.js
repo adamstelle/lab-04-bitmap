@@ -4,7 +4,6 @@ const fs = require('fs');
 const expect = require('chai').expect;
 const colorManipulator = require(`${__dirname}/../model/color-manipulator`);
 const bitmapConstructor = require(`${__dirname}/../model/bitmap-constructor`);
-const bitmapFileHelper = require(`${__dirname}/../lib/bitmap-file-helper`);
 
 describe('Color Manipulator Module', function() {
   var result = {};
@@ -14,7 +13,6 @@ describe('Color Manipulator Module', function() {
       result.picData = bitmapConstructor(data);
       result.data = data;
       done();
-      debugger;
     });
   });
   describe('manipulate function', function() {
@@ -31,22 +29,21 @@ describe('Color Manipulator Module', function() {
     });
   });
   describe('colorInvert function', function() {
-    // beforeEach('run colorInvert function', function() {
-    //   var newResult = colorManipulator.colorInvert(result.data,result.picData);
-    // });
-    it('invert each color on the original buffer file by subtracting it from 255', function() {
-      console.log(result);
-      var initVal = result.colorArray.readUInt8(55);
-      var result = colorManipulator.colorInvert(result.data,result.picData);
-      expect(result.colorArray.readUInt8(55)).to.equal(255-initVal);
+    var initVal;
+    var testResult;
+    before('get initial pixel value for testing manipulations', function() {
+      initVal = result.data.readUInt8(54);
+      colorManipulator.colorInvert(result.data,result.picData, function(data){
+        testResult = data;
+      });
     });
-    it('should write the modified buffer file to a new .bmp file', function() {
-
-    });
-  });
-  describe('.greyScale function', function(){
-    it('should access sets of 4 RGBA values in the buffer', function() {
-
+    it('should invert each color on the original buffer file by subtracting it from 255', function() {
+      expect(testResult.readUInt8(54)).to.equal(255-initVal);
     });
   });
+  // describe('.greyScale function', function(){
+  //   it('should access sets of 4 RGBA values in the buffer', function() {
+  //     // TBD
+  //   });
+  // });
 });

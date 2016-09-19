@@ -4,7 +4,6 @@ const expect = require('chai').expect;
 const fs = require('fs');
 const bitmapConstructor = require('../model/bitmap-constructor');
 
-
 describe('Bitmap Constructor Module', function() {
   var result;
   before('parse the buffer file', function(done){

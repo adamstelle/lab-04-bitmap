@@ -1,4 +1,25 @@
-Adam and Judy Bitmap Lab
+<h1>The Best Darn Bitmap Manipulator Around</h1>
+<em>A node app for reading, manipulating and saving new bitmap images.</em>
+
+<h3>Instructions: fork/clone this repo and run "npm install" in your project directory.</h3>
+
+This project includes 3 color palette manipulations: greyscale, inverting, and scaling one of RGB. It also includes a module to automatically create a border (3px wide) around the image.
+
+It allows for command line inputs for Bitmap images to parse. Syntax is the following: "node index.js <img>." Current options are:
+<em>
+<ul>
+<li>bitmappic</li>
+<li>fingerprint</li>
+<li>house</li>
+<li>nonpalette</li>
+</ul>
+</em>
+
+There's a LOT more we could do with this app. Hope you enjoy playing with it as much as we enjoyed writing it.
+
+Much love,
+Adam & Judy
+==============================================
 
 Model Modules
 1. bitmap-constructor.js
@@ -75,24 +96,3 @@ Otherwise, we assign a variable of picData to the first callback function parame
 In index.js (our main module), the argument for this parameter is also called  bitmapConstructor, which points to const bitmapConstructor declared at the top of the main module, and that const points back to the constructor object on bitmap-constructor.js. The invocation of bitmapConstructor in the main module populates our data in our bitmapConstructor object, and that object is further referenced as picData when passed through other functions.
 
 At line 10 in bitmap-file-helper.js, the second callback of manipulator(data,picData) is defined. This function takes parameters of data and picData. It is invoked in the main module as the third argument/second callback of colors.colorInvert. The invocation of this function populates our color constructor object in the color-manipulator module. (Reference back to #3 above of Model Modules).
-
-
-
-
-
-TODO:
-- Access the buffer of a bitmap file
-  - Break into components
-    - Convert header field buffer to string
-    - Access, parse & store, file size
-    - Access & store offset (location) for pixel array
-- Access the color array
-- Figure out what RGB byte sequence is
-  - (x3) run through each color byte in color array, convert to
-  - save modified bitmap locally as 1/2/3/4
-  - see which is black, red, green, blue
-- Manipulate bitmap in >3 ways:
-  - Invert colors
-  - Grayscale colors
-  - R/G/B scale
-- [Optional]
