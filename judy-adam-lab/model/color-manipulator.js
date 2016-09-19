@@ -40,6 +40,7 @@ exports.writeFile = function(filename, buffer) {
   });
 };
 
+
 exports.manipulate = function(buffer, picData) {
   this.picData = picData;
   this.colorArrayEnd = picData.offset;
