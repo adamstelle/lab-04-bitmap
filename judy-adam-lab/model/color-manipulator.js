@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 const errorHandler = require(`${__dirname}/error-handler.js`);
+const EE = require('events');
+const ee = new EE();
 module.exports = exports = {};
 
 const ColorManipulation = function(buffer, picData) {
@@ -16,17 +18,18 @@ const ColorManipulation = function(buffer, picData) {
   return ColorManipulation;
 };
 
-exports.colorInvert = function(buffer, picData) {
+ee.on('colorInvert', function(buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
   for (var i=0; i<colorData.colorArrayEnd; i++) {
     colorData.colorArray[i] = 255 - colorData.colorArray[i];
   }
   fs.writeFile(`${__dirname}/../assets/outputs/testing-invert.bmp`, buffer, (err) => {
     if(err) throw errorHandler(err);
+    ee.emit('greyScale', buffer, picData);
   });
-};
+});
 
-exports.greyScale = function (buffer, picData) {
+ee.on('greyScale', function (buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
   for (var i=0; i<colorData.colorArray.length; i=i+colorData.rgbSequence){
     var rgba = colorData.colorArray.slice(i,i+colorData.rgbSequence);
@@ -35,16 +38,21 @@ exports.greyScale = function (buffer, picData) {
   }
   fs.writeFile(`${__dirname}/../assets/outputs/testinggreyscale.bmp`, buffer, (err) => {
     if(err) throw errorHandler(err);
+    ee.emit('rgbScale', buffer, picData);
   });
-};
+});
 
-exports.rgbScale = function (buffer, picData) {
+ee.on('rgbScale', function (buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
   for (var i=0; i<colorData.colorArray.length; i=i+colorData.rgbSequence){
     colorData.colorArray[i] = colorData.colorArray[i] * .5;
     colorData.colorArray[i+1] = colorData.colorArray[i+1] * .5;
   }
-  fs.writeFile(`${__dirname}/../assets/outputs/testingrgbscale.bmp`, buffer, (err) => {
+  fs.writeFile(`${__dirname}/../assets/outputs/testingrgbscale.bmp`, buffer,  (err) => {
     if(err) throw errorHandler(err);
   });
+});
+
+module.exports = function(buffer, picData) {
+  ee.emit('colorInvert', buffer, picData);
 };
