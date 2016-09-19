@@ -39,6 +39,7 @@ exports.rgbScale = function (buffer, picData) {
   });
 };
 
+
 exports.manipulate = function(buffer, picData) {
   this.picData = picData;
   this.colorArrayEnd = picData.offset;
