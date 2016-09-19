@@ -6,18 +6,6 @@ const EE = require('events');
 const ee = new EE();
 module.exports = exports = {};
 
-const ColorManipulation = function(buffer, picData) {
-  ColorManipulation.colorArrayEnd = picData.offset;
-  ColorManipulation.rgbSequence = 4;
-  if(ColorManipulation.colorArrayEnd-54==0){
-    console.log('no color palette! manipulating pixels directly...');
-    ColorManipulation.colorArrayEnd = picData.fileSize;
-    ColorManipulation.rgbSequence = 3;
-  }
-  ColorManipulation.colorArray =buffer.slice(54,ColorManipulation.colorArrayEnd);
-  return ColorManipulation;
-};
-
 ee.on('colorInvert', function(buffer, picData) {
   var colorData = ColorManipulation(buffer, picData);
   for (var i=0; i<colorData.colorArrayEnd; i++) {
@@ -52,6 +40,18 @@ ee.on('rgbScale', function (buffer, picData) {
     if(err) throw errorHandler(err);
   });
 });
+
+const ColorManipulation = function(buffer, picData) {
+  ColorManipulation.colorArrayEnd = picData.offset;
+  ColorManipulation.rgbSequence = 4;
+  if(ColorManipulation.colorArrayEnd-54==0){
+    console.log('no color palette! manipulating pixels directly...');
+    ColorManipulation.colorArrayEnd = picData.fileSize;
+    ColorManipulation.rgbSequence = 3;
+  }
+  ColorManipulation.colorArray =buffer.slice(54,ColorManipulation.colorArrayEnd);
+  return ColorManipulation;
+};
 
 module.exports = function(buffer, picData) {
   ee.emit('colorInvert', buffer, picData);
